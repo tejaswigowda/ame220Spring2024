@@ -20,7 +20,7 @@
 4. `#19ff28`
 5. `#0aff37`
 
-- Add css to the html made for Assignment 2 (please use `<style>`/`<link>` tag in the `<head>` section.
+- Add css to the html made for Assignment 2 (please use `<style>`/`<link>` tag in the `<head>` section (inspiration: https://www.w3schools.com/css/css_intro.asp).
 
 ## Grading Criteria
 
@@ -28,6 +28,7 @@
 - Use of css in the html.
 - Use of `<style>`/`<link>` tag in the `<head>` section.
 - showing the math in color conversion.
+
 
 
 

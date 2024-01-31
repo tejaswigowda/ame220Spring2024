@@ -22,6 +22,12 @@
 
 - Add css to the html made for Assignment 2 (please use `<style>`/`<link>` tag in the `<head>` section.
 
+## Grading Criteria
+
+- Correctness of the color conversion.
+- Use of css in the html.
+- Use of `<style>`/`<link>` tag in the `<head>` section.
+- showing the math in color conversion.
 
 
 

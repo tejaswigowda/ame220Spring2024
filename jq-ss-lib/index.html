@@ -29,12 +29,21 @@
             $('#result').attr('src', images[currentIndex + 1]);
         }
     }
+
+    var main = function(){
+        var markup = '';
+        for(var i = 0; i < images.length; i++){
+            markup += '<div class="slide" style="background-image:url(' + images[i] + '"><div>';  
+        }
+        document.getElementById('container').innerHTML = markup;
+    }
     </script>
 </head>
-<body onload="$('#result').attr('src', images[0])">
+<body onload="main()">
     <button onclick="goPrev()"> Prev </button>
     <button onclick="goNext()" style="position:fixed;right:0"> Next </button>
-    <img id="result" style="display:block;width:100%">
+    <div id="container" style="text-align:center"> </div>   
+        
 </body>
 
 <style>

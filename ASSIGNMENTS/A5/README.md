@@ -14,4 +14,4 @@ Starting with the code handout (`code` folder) from the class, implement the sli
 You may or may not need to:
 1. add css specific to `body.fading`
 2. edit the `main()` and `goToCurrentSlide()` functions in `index.html` to add the fading effect.
-
+3. Use `http://localhost:8080/test.html` to test your code.

@@ -29,6 +29,7 @@
             $("#container").stop().animate({marginLeft: '-' + newMargin + 'vw'}, 500);
             // document.getElementById('container').style.marginLeft = '-' + newMargin + 'vw';
         }else{
+
         }
     }
 
@@ -39,6 +40,7 @@
             $("#container").stop().animate({marginLeft: '-' + newMargin + 'vw'}, 500);
             // document.getElementById('container').style.marginLeft = '-' + newMargin + 'vw';
         }else{
+
         }
     }
 
@@ -52,14 +54,17 @@
         if(animation == 'sliding'){
            document.getElementById('container').style.width = images.length * 100 + 'vw';
         }
+        else{
+
+        }
     }
     </script>
 </head>
 <body onload="main()">
     <a style='position:fixed;left:10px;top:calc(50% - 28px)' href="javascript:goPrev()" class="btn-floating btn-large waves-effect waves-light black"><i class="material-icons">arrow_back</i></a>
     <a style='position:fixed;right:10px;top:calc(50% - 28px)'  href="javascript:goNext()" class="btn-floating btn-large waves-effect waves-light black"><i class="material-icons">arrow_forward</i></a>
-    <div id="container" style="text-align:center"> </div>   
-        
+    <div id="container" style="text-align:center"> </div>    
+    <div id="numContainer" style="text-align:center; display:block;position:fixed;width:100vw;bottom:10px"> </div>    
 </body>
 
 <style>

@@ -24,39 +24,48 @@
         }else{
             currentSlide = currentSlide - 1;
         }
-        if(animation == 'sliding'){
-            var newMargin = currentSlide * 100;
-            $("#container").stop().animate({marginLeft: '-' + newMargin + 'vw'}, 500);
-            // document.getElementById('container').style.marginLeft = '-' + newMargin + 'vw';
-        }else{
-
-        }
+        goToCurrentSlide();
     }
 
-    var goNext = function(){
-        currentSlide = (currentSlide + 1) % images.length;
+    var goToCurrentSlide = function(){
         if(animation == 'sliding'){
             var newMargin = currentSlide * 100;
             $("#container").stop().animate({marginLeft: '-' + newMargin + 'vw'}, 500);
             // document.getElementById('container').style.marginLeft = '-' + newMargin + 'vw';
-        }else{
-
+        }else{  // FADING
+  
         }
+        $("#numContainer a").css("color", "");
+        $($("#numContainer a")[currentSlide]).css("color", "gold");
+
+    }
+    var goNext = function(){
+        currentSlide = (currentSlide + 1) % images.length;
+        goToCurrentSlide();
+    }
+
+    function goTo(slide){
+        currentSlide = slide;
+        goToCurrentSlide();
     }
 
     var main = function(){
         $("body").addClass(animation);
         var markup = '';
+        var markup2 = '';
         for(var i = 0; i < images.length; i++){
             markup += '<div class="slide" style="background-image:url(' + images[i] + '"></div>';  
+            markup2 += '<a class="btn black" href="javascript:goTo(' + i + ')">' + (i+1) + '</a>';
         }
         document.getElementById('container').innerHTML = markup;
+        document.getElementById('numContainer').innerHTML = markup2;
         if(animation == 'sliding'){
            document.getElementById('container').style.width = images.length * 100 + 'vw';
         }
-        else{
+        else{ // FADING
 
         }
+        goToCurrentSlide();
     }
     </script>
 </head>

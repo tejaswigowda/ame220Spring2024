@@ -4,7 +4,7 @@
 
 ## Tasks
 
-Starting with the code handout (`code` folder) from the class, implement the slide show we did in class withou using the `jQuery` library. 
+Starting with the code handout (`code` folder) from the class, implement the slide show we did in class without using the `jQuery` library. 
 
 
 

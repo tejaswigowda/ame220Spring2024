@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Simple Slide Show</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script>
+        /*
+        http://localhost:8080#https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Blue_Cranes_%28Anthropoides_paradiseus%29_couple_parading_..._%2832457893122%29.jpg/214px-Blue_Cranes_%28Anthropoides_paradiseus%29_couple_parading_..._%2832457893122%29.jpg,https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Double_Trouble_%284919788838%29.jpg/120px-Double_Trouble_%284919788838%29.jpg,https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Japanse_kraanvogels_in_Akan_International_Crane_Centre%2C_-24_februari_2012_a.jpg/103px-Japanse_kraanvogels_in_Akan_International_Crane_Centre%2C_-24_februari_2012_a.jpg,https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Beautiful_grey_crowned_crane_pair.jpg/231px-Beautiful_grey_crowned_crane_pair.jpg,sliding
+
+        http://localhost:8080#https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Striped_albatross_%28Appias_olferna_olferna%29_female_underside_with_shield_bug.jpg/450px-Striped_albatross_%28Appias_olferna_olferna%29_female_underside_with_shield_bug.jpg,https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lestes_dryas_male_%28dorsal_view%29_-_Kulna.jpg/375px-Lestes_dryas_male_%28dorsal_view%29_-_Kulna.jpg,https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Lestes_dryas_male_%28side_view%29_-_Kulna.jpg/450px-Lestes_dryas_male_%28side_view%29_-_Kulna.jpg,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Brenthis_ino_-_Keila.jpg/450px-Brenthis_ino_-_Keila.jpg,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Map_%28Araschnia_levana%29_form_prorsa_underside_Piatra_Craiului.jpg/300px-Map_%28Araschnia_levana%29_form_prorsa_underside_Piatra_Craiului.jpg,https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Junonia_orithya-Thekkady-2016-12-03-001.jpg/450px-Junonia_orithya-Thekkady-2016-12-03-001.jpg,fading
+        */
+    var images = window.location.hash.replace('#','').split(',');
+    var animation = images.pop();
+    var currentSlide = 0;
+    //document.getElementsByTagName('body')[0].className += "  " + animation;
+    var goPrev = function(){
+        if(currentSlide == 0){
+            currentSlide = images.length-1;
+        }else{
+            currentSlide = currentSlide - 1;
+        }
+        goToCurrentSlide();
+    }
+
+    var goToCurrentSlide = function(){
+        if(animation == 'sliding'){
+            var newMargin = currentSlide * 100;
+            $("#container").stop().animate({marginLeft: '-' + newMargin + 'vw'}, 500);
+            // document.getElementById('container').style.marginLeft = '-' + newMargin + 'vw';
+        }else{  // FADING
+  
+        }
+        $("#numContainer a").css("color", "");
+        $($("#numContainer a")[currentSlide]).css("color", "gold");
+
+    }
+    var goNext = function(){
+        currentSlide = (currentSlide + 1) % images.length;
+        goToCurrentSlide();
+    }
+
+    function goTo(slide){
+        currentSlide = slide;
+        goToCurrentSlide();
+    }
+
+    var main = function(){
+        $("body").addClass(animation);
+        var markup = '';
+        var markup2 = '';
+        for(var i = 0; i < images.length; i++){
+            markup += '<div class="slide" style="background-image:url(' + images[i] + '"></div>';  
+            markup2 += '<a class="btn black" href="javascript:goTo(' + i + ')">' + (i+1) + '</a>';
+        }
+        document.getElementById('container').innerHTML = markup;
+        document.getElementById('numContainer').innerHTML = markup2;
+        if(animation == 'sliding'){
+           document.getElementById('container').style.width = images.length * 100 + 'vw';
+        }
+        else{ // FADING
+
+        }
+        goToCurrentSlide();
+    }
+    </script>
+</head>
+<body onload="main()">
+    <a style='position:fixed;left:10px;top:calc(50% - 28px)' href="javascript:goPrev()" class="btn-floating btn-large waves-effect waves-light black"><i class="material-icons">arrow_back</i></a>
+    <a style='position:fixed;right:10px;top:calc(50% - 28px)'  href="javascript:goNext()" class="btn-floating btn-large waves-effect waves-light black"><i class="material-icons">arrow_forward</i></a>
+    <div id="container" style="text-align:center"> </div>    
+    <div id="numContainer" style="text-align:center; display:block;position:fixed;width:100vw;bottom:10px"> </div>    
+</body>
+
+<style>
+    body{
+        margin:0;
+        background-color: black;
+        overflow: hidden;
+    }
+    #container{
+        display: block;
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        top:0;
+        overflow: hidden;
+    }
+    .slide{
+        display: block;
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    body.sliding .slide{
+        display: inline-block;
+        max-width: 100vw;
+        position: relative;
+    }
+</style>
+
+
+</html>

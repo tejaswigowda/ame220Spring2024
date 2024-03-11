@@ -6,7 +6,7 @@
     .clock-face{
         width:300px;
         height:300px;
-        border:20px solid rgb(246, 231, 231);
+        border:20px solid gray;
         border-radius: 50%;
         margin:auto;
         position: fixed;
@@ -67,6 +67,32 @@
     #tick11{
       transform: translate(150px, 0) rotate(330deg);
     }
+
+    .hand.hour-hand{
+      width: 4px;
+      height: 100px;
+      background-color: red;
+      position: fixed;
+    }
+
+    .hand.min-hand{
+      width: 2px;
+      height: 120px;
+      background-color: blue;
+      position: fixed;
+    }
+
+    .hand.second-hand{
+      width: 1px;
+      height: 140px;
+      background-color: green;
+      position: fixed;
+    }
+
+    .hand{
+      transform: translate(150px, 150px);
+      transform-origin: 50% 0;
+    }
    </style>
   </head>
   <body>
@@ -89,5 +115,19 @@
       </div>
     <script>
 
+      setInterval(refreshClock, 1000);
+
+      function refreshClock(){
+        var now = new Date();
+        var h = now.getHours();
+        var m = now.getMinutes();
+        var s = now.getSeconds();
+        console.log(h + ":" + m + ":" + s);
+        document.querySelector('.second-hand').style.transform = "translate(150px, 150px) rotate(" + (s * (360/60) - 180) + "deg)";
+        document.querySelector('.min-hand').style.transform = "translate(150px, 150px) rotate(" + (m * (360/60) - 180) + "deg)";
+        document.querySelector('.hour-hand').style.transform = "translate(150px, 150px) rotate(" + (((h * (360/12) - 180)) + (m * (30/60)))+ "deg)";
+      }
     </script>
+
+
   </body>

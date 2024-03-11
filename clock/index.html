@@ -14,11 +14,75 @@
         top: 50%;
         transform: translate(-50%, -50%);
     }
+    .tick{
+      width: 2px;
+      height: 10px;
+      background-color: black;
+      position:fixed;
+      transform: translate(150px, 0);
+      transform-origin: 0 150px;
+      
+    }
 
+    #tick1{
+      transform: translate(150px, 0) rotate(30deg);
+    }
+
+    #tick2{
+      transform: translate(150px, 0) rotate(60deg);
+    }
+
+    #tick3{
+      transform: translate(150px, 0) rotate(90deg);
+    }
+
+    #tick4{
+      transform: translate(150px, 0) rotate(120deg);
+    }
+
+    #tick5{
+      transform: translate(150px, 0) rotate(150deg);
+    }
+
+    #tick6{
+      transform: translate(150px, 0) rotate(180deg);
+    }
+
+    #tick7{
+      transform: translate(150px, 0) rotate(210deg);
+    }
+
+    #tick8{
+      transform: translate(150px, 0) rotate(240deg);
+    }
+
+    #tick9{
+      transform: translate(150px, 0) rotate(270deg);
+    }
+
+    #tick10{
+      transform: translate(150px, 0) rotate(300deg);
+    }
+
+    #tick11{
+      transform: translate(150px, 0) rotate(330deg);
+    }
    </style>
   </head>
   <body>
       <div class="clock-face">
+        <div class="tick" id="tick12"></div>
+        <div class="tick" id="tick11"></div>
+        <div class="tick" id="tick10"></div>
+        <div class="tick" id="tick9"></div>
+        <div class="tick" id="tick8"></div>
+        <div class="tick" id="tick7"></div>
+        <div class="tick" id="tick6"></div>
+        <div class="tick" id="tick5"></div>
+        <div class="tick" id="tick4"></div>
+        <div class="tick" id="tick3"></div>
+        <div class="tick" id="tick2"></div>
+        <div class="tick" id="tick1"></div>
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
         <div class="hand second-hand"></div>

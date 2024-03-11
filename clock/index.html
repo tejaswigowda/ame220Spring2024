@@ -13,6 +13,7 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        background-color: white;
     }
     .tick{
       width: 2px;
@@ -115,10 +116,19 @@
       </div>
     <script>
 
+      var hash = window.location.hash.replace('#', '');
+      var offset = 0;
+      if(hash.length > 0){
+       offset = parseFloat(hash);
+      }
       setInterval(refreshClock, 1000);
 
       function refreshClock(){
-        var now = new Date();
+        var x = new Date().getTime();
+        x = x + new Date().getTimezoneOffset() * 60 * 1000;
+        x = x + offset * 60 * 60 * 1000;
+
+        var now = new Date(x);
         var h = now.getHours();
         var m = now.getMinutes();
         var s = now.getSeconds();
@@ -126,6 +136,13 @@
         document.querySelector('.second-hand').style.transform = "translate(150px, 150px) rotate(" + (s * (360/60) - 180) + "deg)";
         document.querySelector('.min-hand').style.transform = "translate(150px, 150px) rotate(" + (m * (360/60) - 180) + "deg)";
         document.querySelector('.hour-hand').style.transform = "translate(150px, 150px) rotate(" + (((h * (360/12) - 180)) + (m * (30/60)))+ "deg)";
+
+        if(h < 6 || h >18){
+          document.querySelector('.clock-face').style.filter = "invert(100%)";
+        }
+        else{
+          document.querySelector('.clock-face').style.filter = "invert(0%)";
+        }
       }
     </script>
 

@@ -2,6 +2,7 @@
 
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
@@ -11,19 +12,28 @@
                 var instances = M.Modal.init(elems, {});
                 elems = document.querySelectorAll('select');
                 instances = M.FormSelect.init(elems, {});
+                $('#modalTitle').off('click');
+            }
+
+            function openDD(){
+               // open modal
+                var instance = M.Modal.getInstance(document.getElementById('modal1'));
+                instance.open();
+                $('.select-dropdown.dropdown-trigger').click();
+
             }
         </script>
     </head>
     <body onload="main()">
         <div id="clocks">
             <div id="'clockList"></div>
-            <a data-target="modal1" style='position:fixed;right: 10px; bottom:10px ' class="btn-floating btn-large waves-effect waves-light  modal-trigger black"><i class="material-icons">access_time</i></a>
+            <a href='javascript:openDD()' style='position:fixed;right: 10px; bottom:10px ' class="btn-floating btn-large waves-effect waves-light  modal-trigger black"><i class="material-icons">access_time</i></a>
         </div>
         <div id="bigClock"></div>
 
         <div id="modal1" class="modal">
-            <div class="modal-content">
-              <h4>Manage Timezones</h4>
+            <div class="modal-content" style="padding:0">
+              <h4 id='modalTitle' onclick="event.preventDefault();" style="pointer-events: none">Manage Timezones</h4>
               <select name="timezone" id="timezone" multiple>
                 <option value="-12">(UTC-12:00) International Date Line West</option>
                 <option value="-11">(UTC-11:00) Coordinated Universal Time-11</option>
@@ -133,9 +143,6 @@
                 <option value="13">(UTC+13:00) Samoa</option>
             </select>
             </div>
-            <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Done</a>
-            </div>
           </div>
     </body>
     <style>
@@ -154,9 +161,19 @@
             top: 0;
         }
         #modal1{
-            width: 90%;
+            width: 80%;
+            max-height: 100vh;
             height: 100vh;
             overflow:hidden;
+            margin-top: -10%;
+            pointer-events: none;
+        }
+        .select-wrapper{
+            pointer-events: auto;
+        }
+        .select-wrapper ul{
+            min-width: 100% !important;
+            box-shadow: none !important;
         }
     </style>
 </html>

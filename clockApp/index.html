@@ -4,9 +4,29 @@
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
     </head>
     <body>
-
+        <div id="clocks">
+            <div id="'clockList"></div>
+            <a style='position:fixed;right: 10px; bottom:10px ' class="btn-floating btn-large waves-effect waves-light black"><i class="material-icons">access_time</i></a>
+        </div>
+        <div id="bigClock"></div>
     </body>
+    <style>
+        #clocks{
+            width: 300px;
+            height: 100vh;
+            overflow: auto;
+            background-color: lightblue;
+        }
+        #bigClock{
+            width: calc(100vw - 300px);
+            height: 100vh;
+            background-color: lightgreen;
+            position: fixed;
+            right: 0;
+            top: 0;
+        }
+    </style>
 </html>

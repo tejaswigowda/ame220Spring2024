@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clock</title>
+   <style>
+    .clock-face{
+        width:300px;
+        height:300px;
+        border:20px solid gray;
+        border-radius: 50%;
+        margin:auto;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+    }
+    .tick{
+      width: 2px;
+      height: 10px;
+      background-color: black;
+      position:fixed;
+      transform: translate(150px, 0);
+      transform-origin: 0 150px;
+      
+    }
+
+    #tick1{
+      transform: translate(150px, 0) rotate(30deg);
+    }
+
+    #tick2{
+      transform: translate(150px, 0) rotate(60deg);
+    }
+
+    #tick3{
+      transform: translate(150px, 0) rotate(90deg);
+    }
+
+    #tick4{
+      transform: translate(150px, 0) rotate(120deg);
+    }
+
+    #tick5{
+      transform: translate(150px, 0) rotate(150deg);
+    }
+
+    #tick6{
+      transform: translate(150px, 0) rotate(180deg);
+    }
+
+    #tick7{
+      transform: translate(150px, 0) rotate(210deg);
+    }
+
+    #tick8{
+      transform: translate(150px, 0) rotate(240deg);
+    }
+
+    #tick9{
+      transform: translate(150px, 0) rotate(270deg);
+    }
+
+    #tick10{
+      transform: translate(150px, 0) rotate(300deg);
+    }
+
+    #tick11{
+      transform: translate(150px, 0) rotate(330deg);
+    }
+
+    .hand.hour-hand{
+      width: 4px;
+      height: 100px;
+      background-color: red;
+      position: fixed;
+    }
+
+    .hand.min-hand{
+      width: 2px;
+      height: 120px;
+      background-color: blue;
+      position: fixed;
+    }
+
+    .hand.second-hand{
+      width: 1px;
+      height: 140px;
+      background-color: green;
+      position: fixed;
+    }
+
+    .hand{
+      transform: translate(150px, 150px);
+      transform-origin: 50% 0;
+    }
+   </style>
+  </head>
+  <body>
+      <div class="clock-face">
+        <div class="tick" id="tick12"></div>
+        <div class="tick" id="tick11"></div>
+        <div class="tick" id="tick10"></div>
+        <div class="tick" id="tick9"></div>
+        <div class="tick" id="tick8"></div>
+        <div class="tick" id="tick7"></div>
+        <div class="tick" id="tick6"></div>
+        <div class="tick" id="tick5"></div>
+        <div class="tick" id="tick4"></div>
+        <div class="tick" id="tick3"></div>
+        <div class="tick" id="tick2"></div>
+        <div class="tick" id="tick1"></div>
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    <script>
+
+      var hash = window.location.hash.replace('#', '');
+      var offset = 0;
+      if(hash.length > 0){
+       offset = parseFloat(hash);
+      }
+      setInterval(refreshClock, 1000);
+
+      function refreshClock(){
+        var x = new Date().getTime();
+        x = x + new Date().getTimezoneOffset() * 60 * 1000;
+        x = x + offset * 60 * 60 * 1000;
+
+        var now = new Date(x);
+        var h = now.getHours();
+        var m = now.getMinutes();
+        var s = now.getSeconds();
+        console.log(h + ":" + m + ":" + s);
+        document.querySelector('.second-hand').style.transform = "translate(150px, 150px) rotate(" + (s * (360/60) - 180) + "deg)";
+        document.querySelector('.min-hand').style.transform = "translate(150px, 150px) rotate(" + (m * (360/60) - 180) + "deg)";
+        document.querySelector('.hour-hand').style.transform = "translate(150px, 150px) rotate(" + (((h * (360/12) - 180)) + (m * (30/60)))+ "deg)";
+
+        if(h < 6 || h >18){
+          document.querySelector('.clock-face').style.filter = "invert(100%)";
+        }
+        else{
+          document.querySelector('.clock-face').style.filter = "invert(0%)";
+        }
+      }
+    </script>
+
+
+  </body>

@@ -116,11 +116,13 @@
       </div>
     <script>
 
+
       var hash = window.location.hash.replace('#', '');
       var offset = 0;
       if(hash.length > 0){
        offset = parseFloat(hash);
       }
+      refreshClock();
       setInterval(refreshClock, 1000);
 
       function refreshClock(){

@@ -4,7 +4,7 @@
 
 ## Tasks
 
-Starting with the code handout (`code` folder) from the class, please implement the `clockList` function in `index.html` to display the current timezone name along with the clock time. The timezone name can be accessed using the `timezone` selector in the `index.html` file. 
+Starting with the code handout (`code` folder) from the class, please implement the `clockList` function in `index.html` to display the current timezone name<s> along with the clock time</s>. The timezone name can be accessed using the `timezone` selector in the `index.html` file. 
 
 ## Hints
 

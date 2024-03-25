@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
         var tzSelect = null
         function main() {
@@ -19,6 +20,14 @@
             elems = document.querySelectorAll('select');
             tzSelect = M.FormSelect.init(elems, {})[0];
             $('#modalTitle').off('click');
+
+            var timezones = JSON.parse(localStorage.getItem('tz'));
+            if(timezones){
+                makeClocklist(timezones);
+                for (var i = 0; i < timezones.length; i++) {
+                    $("#timezone option[value='" + timezones[i] + "']").prop("selected", true);
+                }
+            }
         }
 
         function openDD() {
@@ -29,6 +38,7 @@
         }
 
         function makeClocklist(timezones) {
+            localStorage.setItem('tz', JSON.stringify(timezones));
             console.log(timezones);
             var markup = '';
             for (var i = 0; i < timezones.length; i++) {
@@ -41,7 +51,7 @@
                 var tzOffset = tz[0];
                 var tzName = $(`#timezone option[value="${timezones[i]}"]`).text();
                 markup += "<button onclick='clockClick(" + i + ",\"" + tzOffset + "\",\"" + tzName + "\",\"" + offsettext + "\")' "
-                + "class='btn white' style='width:100%;height:100px'> <iframe src='./clock.html#" + tzOffset + "'></iframe>" +
+                    + "class='btn white' style='width:100%;height:100px'> <iframe src='./clock.html#" + tzOffset + "'></iframe>" +
                     "<h4>" + tztext + "</h4>" +
                     "<h5>" + offsettext + "</h5>" +
                     "</button>"
@@ -53,23 +63,33 @@
 
         function clockClick(index, tzOffset, tzName, offsettext) {
 
+            $("body").addClass('bigClock');
 
             var bigClock = document.getElementById('bigClock');
-            bigClock.innerHTML =    "<h4>" + tzName + "</h4>" +
-                "<h5>" + offsettext + "</h5>"+ 
-            "<iframe src='./clock.html#" + tzOffset + "' style='border:none; width: 370px; height:370px; display:block; margin:auto'></iframe>" ;
+            bigClock.innerHTML = "<h4>" + tzName + "</h4>" +
+                "<h5>" + offsettext + "</h5>" +
+                "<iframe src='./clock.html#" + tzOffset + "' style='border:none; width: 370px; height:370px; display:block; margin:auto'></iframe>";
             $("#clockList button").removeClass('blue').addClass('white');
             $("#clockList button").eq(index).removeClass('white').addClass('blue');
         }
+
+        function goBack() {
+            $("body").removeClass('bigClock');
+            $("#clockList button").removeClass('blue').addClass('white');
+        }
     </script>
 </head>
- 
+
 <body onload="main()">
+    <a href='javascript:goBack()' id="backButton" style='position:fixed;left: 10px; bottom:10px '
+    class="btn-floating btn-large waves-effect waves-light  modal-trigger blue"><i
+        class="material-icons">arrow_back</i></a>
     <div id="clocks">
         <div id="clockList"></div>
         <a href='javascript:openDD()' style='position:fixed;right: 10px; bottom:10px '
             class="btn-floating btn-large waves-effect waves-light  modal-trigger black"><i
                 class="material-icons">access_time</i></a>
+
     </div>
     <div id="bigClock" style="text-align:center;"></div>
 
@@ -235,7 +255,7 @@
         margin: 0;
         font-size: 20px;
         color: black;
-        width : calc(100% - 100px);
+        width: calc(100% - 100px);
         text-align: left;
         margin-top: -320px;
         margin-left: 110px;
@@ -245,18 +265,49 @@
         line-height: 35px;
         text-overflow: ellipsis;
         white-space: nowrap;
-        
+
     }
 
     #clockList button h5 {
         margin: 0;
         font-size: 17px;
         color: black;
-        width : calc(100% - 100px);
+        width: calc(100% - 100px);
         text-align: left;
         margin-left: 110px;
         float: right;
-        margin-top:-290px;
+        margin-top: -290px;
+    }
+    
+    #backButton {
+        display: none;
+    }
+
+    @media (max-width: 600px) {
+        #clocks {
+            width: 100vw;
+            z-index: 1;
+            position: fixed;
+        }
+
+        #bigClock {
+            width: 100vw;
+            z-index: 0;
+            position: fixed;
+        }
+
+        body.bigClock #clocks {
+            z-index: -1;
+        }
+
+        body.bigClock #bigClock {
+            z-index: 1;
+        }
+
+        body.bigClock #backButton {
+            display: block;
+            z-index: 9;
+        }
     }
 </style>
 

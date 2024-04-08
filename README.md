@@ -16,3 +16,7 @@ https://docs.google.com/presentation/d/1zdb7fxvypluFdvB70kIAXeBHBqyz6P18H5XExAu0
 Capacitor.js HOWTO: https://gist.github.com/tejaswigowda/8449ed1365a255bca26eb6c519755db2
 
 
+Cap.js + Phaser game bootstrap code: https://github.com/ionic-team/capacitor-starters/tree/main
+
+
+

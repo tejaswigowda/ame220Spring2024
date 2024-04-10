@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+<title>
+  API Call
+</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div id="result"></div>
+</body>
+<script>
+    function makeAPICall(){
+        $.ajax({
+            url: "https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=272cee484d9cfe63d8e97f770409f900",
+            type: "GET",
+            success: function(result){
+                $("#result").html(result);
+            }
+        });
+    }
+
+    makeAPICall();
+</script>
+
+</html>
